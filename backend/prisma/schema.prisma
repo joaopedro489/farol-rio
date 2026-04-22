@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique
+  salt       String
+  hash       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+
+  reviewedChildren Child[] @relation("ReviewedBy")
+
+  @@map("users")
+}
+
+model Child {
+  id                  String    @id @default(cuid())
+  name                String
+  birthday            DateTime  @db.Date
+  neighborhood        String
+  responsible         String
+  health              Json?
+  education           Json?
+  social_assistance   Json?
+  reviewed            Boolean   @default(false)
+  reviewed_by_user_id Int?
+  reviewed_at         DateTime?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+
+  reviewed_by User? @relation("ReviewedBy", fields: [reviewed_by_user_id], references: [id])
+
+  @@index([neighborhood])
+  @@index([reviewed])
+  @@index([health])
+  @@index([education])
+  @@index([social_assistance])
+  @@map("children")
+}
