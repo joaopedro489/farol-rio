@@ -1,6 +1,6 @@
 import { Controller, Get, UseGuards } from '@nestjs/common'
 
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '@/shared/guards/jwt-auth.guard'
 
 import { DashboardSettingsRoutes } from '../../../settings/routes'
 import { AlertsByNeighborhoodService } from '../../../services/alerts-by-neighborhood/alerts-by-neighborhood.service'

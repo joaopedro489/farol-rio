@@ -1,4 +1,4 @@
-import { UserContext } from 'src/shared/context'
+import { UserContext } from '@/shared/context'
 
 export type UserContextModelConstructor = {
   id: number

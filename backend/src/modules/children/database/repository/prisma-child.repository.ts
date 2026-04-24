@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
-import { Prisma } from 'src/generated/prisma/client'
-import { PrismaService } from 'src/shared/database/prisma.service'
+import { Prisma } from '@/generated/prisma/client'
+import { PrismaService } from '@/shared/database/prisma.service'
 
 import { Child } from '../../domain/entities/child.entity'
 import { AlertTypeEnum } from '../../domain/types/enum/alert-type.enum'

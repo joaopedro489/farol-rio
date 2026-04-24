@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
 
-import { SharedTokens } from 'src/shared/constants/tokens'
-import { Context } from 'src/shared/context/services/context.interface'
-import { UserContext } from 'src/shared/context/types/user-context.type'
+import { SharedTokens } from '@/shared/constants/tokens'
+import { Context } from '@/shared/context/services/context.interface'
+import { UserContext } from '@/shared/context/types/user-context.type'
 
 import { ReviewChildService } from './review-child.service'
 import { ChildRepository } from '../../database/repository/child.repository'

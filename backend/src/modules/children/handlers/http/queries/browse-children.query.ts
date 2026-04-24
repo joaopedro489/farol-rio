@@ -11,7 +11,7 @@ import {
 
 import { AlertTypeEnum } from '../../../domain/types/enum/alert-type.enum'
 import { ReviewStatusEnum } from '../../../domain/types/enum/review-status.enum'
-import { stringToArrayTransformer } from 'src/modules/children/utils/string-to-array'
+import { stringToArrayTransformer } from '@/modules/children/utils/string-to-array'
 
 export class BrowseChildrenQuery {
   @IsOptional()

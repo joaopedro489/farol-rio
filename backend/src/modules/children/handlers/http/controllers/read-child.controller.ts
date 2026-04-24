@@ -1,6 +1,6 @@
 import { Controller, Get, Param, UseGuards } from '@nestjs/common'
 
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '@/shared/guards/jwt-auth.guard'
 
 import { ReadChildService } from '../../../services/read-child/read-child.service'
 import { ChildrenSettingsRoutes } from '../../../settings/routes'

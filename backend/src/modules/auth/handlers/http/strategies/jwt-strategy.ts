@@ -3,9 +3,9 @@ import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 
 import { JWTType } from './jwt-type'
-import { UserContext } from 'src/shared/context'
-import { AuthTokens } from 'src/modules/auth/constants/tokens'
-import { UserRepository } from 'src/modules/auth/database/repository/user.repository'
+import { UserContext } from '@/shared/context'
+import { AuthTokens } from '@/modules/auth/constants/tokens'
+import { UserRepository } from '@/modules/auth/database/repository/user.repository'
 
 type ValidateReturn = Promise<
   | {

@@ -8,7 +8,7 @@ import {
 import { Request } from 'express'
 import { Observable } from 'rxjs'
 
-import { extractIp } from 'src/shared/utils/extract-ip'
+import { extractIp } from '@/shared/utils/extract-ip'
 
 @Injectable()
 export class LoggerInterceptor implements NestInterceptor {

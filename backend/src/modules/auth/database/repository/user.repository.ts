@@ -1,4 +1,4 @@
-import { UserContext } from 'src/shared/context'
+import { UserContext } from '@/shared/context'
 import { User } from '../../domain/entities/user.entity'
 
 export interface UserRepository {

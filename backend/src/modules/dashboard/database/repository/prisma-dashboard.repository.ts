@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 
-import { Prisma } from 'src/generated/prisma/client'
-import { PrismaService } from 'src/shared/database/prisma.service'
+import { Prisma } from '@/generated/prisma/client'
+import { PrismaService } from '@/shared/database/prisma.service'
 
 import { AlertsByNeighborhoodOutput } from '../../domain/outputs/alerts-by-neighborhood.output'
 import { AlertsBySeverityOutput } from '../../domain/outputs/alerts-by-severity.output'

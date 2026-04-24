@@ -1,9 +1,9 @@
 import { Controller, Param, Patch, UseGuards } from '@nestjs/common'
 
-import { JwtAuthGuard } from 'src/shared/guards/jwt-auth.guard'
+import { JwtAuthGuard } from '@/shared/guards/jwt-auth.guard'
 
 import { ChildrenSettingsRoutes } from '../../../settings/routes'
-import { ReviewChildService } from 'src/modules/children/services/review-child/review-child.service'
+import { ReviewChildService } from '@/modules/children/services/review-child/review-child.service'
 
 @Controller(ChildrenSettingsRoutes.REVIEW)
 @UseGuards(JwtAuthGuard)
