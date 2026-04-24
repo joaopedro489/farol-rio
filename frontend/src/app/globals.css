@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* dark: variant applies when a parent has .dark class (shadcn pattern) */
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Our design tokens ──────────────────────────────────────────────── */
+:root {
+  /* superfícies */
+  --c-bg:              #F5F4F0;
+  --c-surface:         #FFFFFF;
+  --c-surface-alt:     #FAF9F5;
+  --c-surface-sunken:  #EFEDE7;
+
+  /* bordas */
+  --c-border:          #E4E1D7;
+  --c-border-strong:   #CDC9BD;
+
+  /* texto */
+  --c-text:            #1C2429;
+  --c-text-muted:      #5A6370;
+  --c-text-subtle:     #8A8F98;
+
+  /* semânticas */
+  --c-primary:         #1F4A5F;
+  --c-primary-soft:    #E0E8EC;
+  --c-ok:              #3D6B4A;
+  --c-ok-soft:         #E2EBE3;
+  --c-attention:       #8A5A1E;
+  --c-attention-soft:  #F2E8D6;
+}
+
+.dark {
+  --c-bg:              #0F1518;
+  --c-surface:         #161D21;
+  --c-surface-alt:     #1A2327;
+  --c-surface-sunken:  #0B1113;
+
+  --c-border:          #242D32;
+  --c-border-strong:   #36424A;
+
+  --c-text:            #E7E4DC;
+  --c-text-muted:      #9AA3AD;
+  --c-text-subtle:     #6B7480;
+
+  --c-primary:         #6EA3BB;
+  --c-primary-soft:    #1D2E36;
+  --c-ok:              #7FB48E;
+  --c-ok-soft:         #1A2821;
+  --c-attention:       #D4A25A;
+  --c-attention-soft:  #2A2014;
+}
+
+
+/* ─── shadcn semantic tokens — mapped to our design tokens ───────────── */
+:root {
+  --background:           var(--c-bg);
+  --foreground:           var(--c-text);
+  --card:                 var(--c-surface);
+  --card-foreground:      var(--c-text);
+  --popover:              var(--c-surface);
+  --popover-foreground:   var(--c-text);
+  --primary:              var(--c-primary);
+  --primary-foreground:   #FFFFFF;
+  --secondary:            var(--c-surface-alt);
+  --secondary-foreground: var(--c-text);
+  --muted:                var(--c-surface-sunken);
+  --muted-foreground:     var(--c-text-muted);
+  --accent:               var(--c-surface-alt);
+  --accent-foreground:    var(--c-text);
+  --destructive:          oklch(0.577 0.245 27.325);
+  --border:               var(--c-border);
+  --input:                var(--c-border);
+  --ring:                 var(--c-primary);
+  --radius:               0.5rem;
+
+  /* charts */
+  --chart-1: var(--c-primary);
+  --chart-2: var(--c-ok);
+  --chart-3: var(--c-attention);
+  --chart-4: var(--c-text-muted);
+  --chart-5: var(--c-border);
+
+  /* sidebar */
+  --sidebar:                    var(--c-surface);
+  --sidebar-foreground:         var(--c-text);
+  --sidebar-primary:            var(--c-primary);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:             var(--c-surface-alt);
+  --sidebar-accent-foreground:  var(--c-text);
+  --sidebar-border:             var(--c-border);
+  --sidebar-ring:               var(--c-primary);
+}
+
+/* ─── Tailwind utilities from our tokens ─────────────────────────────── */
+@theme inline {
+  --color-bg:              var(--c-bg);
+  --color-surface:         var(--c-surface);
+  --color-surface-alt:     var(--c-surface-alt);
+  --color-surface-sunken:  var(--c-surface-sunken);
+
+  --color-border:          var(--c-border);
+  --color-border-strong:   var(--c-border-strong);
+
+  --color-text:            var(--c-text);
+  --color-text-muted:      var(--c-text-muted);
+  --color-text-subtle:     var(--c-text-subtle);
+
+  --color-primary:         var(--c-primary);
+  --color-primary-soft:    var(--c-primary-soft);
+  --color-ok:              var(--c-ok);
+  --color-ok-soft:         var(--c-ok-soft);
+  --color-attention:       var(--c-attention);
+  --color-attention-soft:  var(--c-attention-soft);
+
+  /* shadcn tokens also available as Tailwind utilities */
+  --color-background:         var(--background);
+  --color-foreground:         var(--foreground);
+  --color-card:               var(--card);
+  --color-card-foreground:    var(--card-foreground);
+  --color-popover:            var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-tw:         var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary:          var(--secondary);
+  --color-muted:              var(--muted);
+  --color-muted-foreground:   var(--muted-foreground);
+  --color-accent:             var(--accent);
+  --color-destructive:        var(--destructive);
+  --color-ring:               var(--ring);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-bg text-text font-sans;
+  }
+}
