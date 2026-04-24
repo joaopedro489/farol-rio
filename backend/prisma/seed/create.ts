@@ -1,16 +1,12 @@
 import 'dotenv/config';
 
 import { readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 import { PrismaPg } from '@prisma/adapter-pg';
 import bcrypt from 'bcrypt';
 
-import { PrismaClient } from '../../src/generated/prisma/client.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { PrismaClient } from '../../src/generated/prisma/client';
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
@@ -19,18 +15,40 @@ const SALT_ROUNDS = 10;
 const DEFAULT_USER_EMAIL = 'tecnico@prefeitura.rio';
 const DEFAULT_USER_PASSWORD = 'painel@2024';
 
+enum AlertEnum {
+  LATE_VACCINE = 'vacinas_atrasadas',
+  LOW_FREQUENCY = 'frequencia_baixa',
+  LATE_APPOINTMENT = 'consulta_atrasada',
+  SUSPENDED_BENEFIT = 'beneficio_suspenso',
+  OUTDATED_REGISTRATION = 'cadastro_desatualizado',
+  PENDING_ENROLLMENT = 'matricula_pendente',
+  ABSENT_REGISTRATION = 'cadastro_ausente',
+}
+
 type SeedChild = {
   id: string;
   nome: string;
   data_nascimento: string;
   bairro: string;
   responsavel: string;
-  saude: unknown;
-  educacao: unknown;
-  assistencia_social: unknown;
+  saude: {
+    vacinas_em_dia: boolean;
+    ultima_consulta: string;
+    alertas: AlertEnum[];
+  } | null;
+  educacao: {
+    escola: string;
+    frequencia_percent: number;
+    alertas: AlertEnum[];
+  } | null;
+  assistencia_social: {
+    cad_unico: boolean;
+    beneficio_ativo: boolean;
+    alertas: AlertEnum[];
+  } | null;
   revisado: boolean;
   revisado_por: string | null;
-  revisado_em: string | null;
+  revisado_em: Date | null;
 };
 
 async function main() {
@@ -93,6 +111,32 @@ async function createChildren({
         fallbackUserId: defaultReviewerUserId,
       });
 
+      const health = item.saude
+        ? {
+            vaccinesUpToDate: item.saude.vacinas_em_dia,
+            lastMedicalAppointment: item.saude.ultima_consulta
+              ? new Date(item.saude.ultima_consulta)
+              : null,
+            alerts: item.saude.alertas,
+          }
+        : null;
+
+      const education = item.educacao
+        ? {
+            school: item.educacao.escola,
+            frequency: item.educacao.frequencia_percent,
+            alerts: item.educacao.alertas,
+          }
+        : null;
+
+      const social_assistance = item.assistencia_social
+        ? {
+            cad: item.assistencia_social.cad_unico,
+            benefit: item.assistencia_social.beneficio_ativo,
+            alerts: item.assistencia_social.alertas,
+          }
+        : null;
+
       const child = await prisma.child.upsert({
         where: { id: item.id },
         update: {},
@@ -102,9 +146,9 @@ async function createChildren({
           birthday: new Date(item.data_nascimento),
           neighborhood: item.bairro,
           responsible: item.responsavel,
-          health: item.saude as never,
-          education: item.educacao as never,
-          social_assistance: item.assistencia_social as never,
+          health: health || undefined,
+          education: education || undefined,
+          social_assistance: social_assistance || undefined,
           reviewed: item.revisado,
           reviewed_by_user_id: item.revisado ? reviewedByUserId : null,
           reviewed_at: item.revisado_em ? new Date(item.revisado_em) : null,
