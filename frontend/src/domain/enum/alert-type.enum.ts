@@ -1,5 +1,0 @@
-export enum AlertTypeEnum {
-  HEALTH = 'HEALTH',
-  EDUCATION = 'EDUCATION',
-  SOCIAL_ASSISTANCE = 'SOCIAL_ASSISTANCE'
-}
