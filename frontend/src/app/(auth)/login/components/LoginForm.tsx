@@ -1,15 +1,17 @@
+'use client'
+
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { Control } from 'react-hook-form'
-import { LoginFormData } from '../page'
+import { LoginFormData } from './LoginContent'
 
 type LoginFormProps = {
   control: Control<LoginFormData>
 }
 
-export default function LoginForm({ control }: LoginFormProps) {
+export const LoginForm = ({ control }: LoginFormProps) => {
   const [show, setShow] = useState(false)
 
   return (
