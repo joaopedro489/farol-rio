@@ -3,9 +3,9 @@
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/providers/ThemeProvider'
 import { Switch } from '@/components/ui/switch'
-import { ThemeEnum } from '@/domain/enum/theme.enum'
+import { ThemeEnum } from '@/domain/enums/theme.enum'
 
-export function ThemeSwitch() {
+export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme()
 
   const isDark = theme === ThemeEnum.DARK

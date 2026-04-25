@@ -1,6 +1,6 @@
 'use client'
 
-import { ThemeEnum } from '@/domain/enum/theme.enum'
+import { ThemeEnum } from '@/domain/enums/theme.enum'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 type ThemeContextValue = {
@@ -13,10 +13,10 @@ const ThemeContext = createContext<ThemeContextValue>({
   setTheme: () => {}
 })
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setThemeState] = useState<ThemeEnum>(ThemeEnum.LIGHT)
 
-  function setTheme(t: ThemeEnum) {
+  const setTheme = (t: ThemeEnum) => {
     localStorage.setItem('theme', t)
     setThemeState(t)
     document.documentElement.classList.toggle('dark', t === ThemeEnum.DARK)
