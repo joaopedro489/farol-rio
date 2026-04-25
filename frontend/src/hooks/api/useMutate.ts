@@ -2,7 +2,7 @@ import {
   DefaultError,
   useMutation,
   UseMutationOptions,
-  useQueryClient,
+  useQueryClient
 } from '@tanstack/react-query'
 
 type QueryKey = any[]
@@ -31,28 +31,34 @@ export type IUseMutateProps<TData, TVariables, TError, TContext> = UseMutationOp
   }
 
 export function useMutate<TData, TError = DefaultError, TVariables = void, TContext = unknown>(
-  params: IUseMutateProps<TData, TVariables, TError, TContext>,
+  params: IUseMutateProps<TData, TVariables, TError, TContext>
 ) {
   const queryClient = useQueryClient()
 
   function invalidateSingle(
     key: InvalidateQueryKeyType<TData, TVariables, TContext>,
-    args: [TData, TVariables, TContext],
+    args: [TData, TVariables, TContext]
   ) {
     const resolvedKey = typeof key === 'function' ? key(...args) : key
     if (resolvedKey && resolvedKey.length > 0) {
-      queryClient.invalidateQueries({ queryKey: resolvedKey, refetchType: params.refetchType ?? 'active' })
+      queryClient.invalidateQueries({
+        queryKey: resolvedKey,
+        refetchType: params.refetchType ?? 'active'
+      })
     }
   }
 
   function invalidateMany(
     keys: InvalidateManyQueryKeysType<TData, TVariables, TContext>,
-    args: [TData, TVariables, TContext],
+    args: [TData, TVariables, TContext]
   ) {
     const resolvedKeys = typeof keys === 'function' ? keys(...args) : keys
     resolvedKeys.forEach((key) => {
       if (key.length > 0) {
-        queryClient.invalidateQueries({ queryKey: key, refetchType: params.refetchType ?? 'active' })
+        queryClient.invalidateQueries({
+          queryKey: key,
+          refetchType: params.refetchType ?? 'active'
+        })
       }
     })
   }
@@ -64,6 +70,6 @@ export function useMutate<TData, TError = DefaultError, TVariables = void, TCont
       if ('invalidateQueryKey' in params) invalidateSingle(params.invalidateQueryKey, args)
       if ('invalidateManyQueryKeys' in params) invalidateMany(params.invalidateManyQueryKeys, args)
       params.onSuccess?.(data, variables, onMutateResult, mutationContext)
-    },
+    }
   })
 }

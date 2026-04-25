@@ -1,6 +1,6 @@
 import { readAlertsByNeighborhood } from '@/services/dashboard/read-alerts-by-neighborhood'
 import { useFetch } from '../useFetch'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 
 export const useFetchAlertsByNeighborhood = () => {
   const { data, ...response } = useFetch({

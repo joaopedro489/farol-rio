@@ -1,9 +1,9 @@
 import { QueryKey, useQueryClient } from '@tanstack/react-query'
 
-export function useInvalidateQuery() {
+export const useInvalidateQuery = () => {
   const queryClient = useQueryClient()
 
-  function invalidateQueryKey(queryKey: QueryKey) {
+  const invalidateQueryKey = (queryKey: QueryKey) => {
     queryClient.invalidateQueries({ queryKey, refetchType: 'all' })
   }
 

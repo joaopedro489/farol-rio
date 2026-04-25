@@ -1,6 +1,6 @@
 import { readSummary } from '@/services/dashboard/read-summary'
 import { useFetch } from '../useFetch'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 
 export const useFetchSummary = () => {
   const { data, ...response } = useFetch({

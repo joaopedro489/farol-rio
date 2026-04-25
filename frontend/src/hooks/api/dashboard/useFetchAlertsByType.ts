@@ -1,6 +1,6 @@
 import { readAlertsByType } from '@/services/dashboard/read-alerts-by-type'
 import { useFetch } from '../useFetch'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 
 export const useFetchAlertsByType = () => {
   const { data, ...response } = useFetch({

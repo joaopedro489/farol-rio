@@ -1,5 +1,5 @@
 import apiRequest from '@/lib/api'
-import { AlertsByType } from '@/domain/model/dashboard/alerts-by-type.model'
+import { AlertsByType } from '@/domain/models/dashboard/alerts-by-type.model'
 
 export const readAlertsByType = async (): Promise<AlertsByType> => {
   const response = (await apiRequest<AlertsByType>({

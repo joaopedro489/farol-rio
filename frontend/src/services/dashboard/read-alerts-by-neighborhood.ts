@@ -1,5 +1,5 @@
 import apiRequest from '@/lib/api'
-import { AlertsByNeighborhood } from '@/domain/model/dashboard/alerts-by-neighborhood.model'
+import { AlertsByNeighborhood } from '@/domain/models/dashboard/alerts-by-neighborhood.model'
 
 export const readAlertsByNeighborhood = async (): Promise<AlertsByNeighborhood[]> => {
   const response = (await apiRequest<AlertsByNeighborhood[]>({

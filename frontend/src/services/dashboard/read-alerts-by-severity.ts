@@ -1,5 +1,5 @@
 import apiRequest from '@/lib/api'
-import { AlertsBySeverity } from '@/domain/model/dashboard/alerts-by-severity.model'
+import { AlertsBySeverity } from '@/domain/models/dashboard/alerts-by-severity.model'
 
 export const readAlertsBySeverity = async (): Promise<AlertsBySeverity> => {
   const response = (await apiRequest<AlertsBySeverity>({

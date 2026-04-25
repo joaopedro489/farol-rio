@@ -1,6 +1,6 @@
 import { login } from '@/services/auth/login'
 import { useMutate } from '../useMutate'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 import { useAuth } from '@/providers/AuthProvider'
 import { toast } from 'sonner'
 

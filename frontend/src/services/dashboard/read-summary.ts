@@ -1,5 +1,5 @@
 import apiRequest from '@/lib/api'
-import { DashboardSummary } from '@/domain/model/dashboard/summary.model'
+import { DashboardSummary } from '@/domain/models/dashboard/summary.model'
 
 export const readSummary = async (): Promise<DashboardSummary> => {
   const response = (await apiRequest<DashboardSummary>({

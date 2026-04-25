@@ -1,6 +1,6 @@
 import { readAlertsBySeverity } from '@/services/dashboard/read-alerts-by-severity'
 import { useFetch } from '../useFetch'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 
 export const useFetchAlertsBySeverity = () => {
   const { data, ...response } = useFetch({

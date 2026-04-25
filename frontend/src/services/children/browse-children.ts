@@ -1,10 +1,10 @@
 import apiRequest from '@/lib/api'
-import { AlertTypeEnum } from '@/domain/enum/alert-type.enum'
-import { ReviewStatusEnum } from '@/domain/enum/review-status.enum'
-import { BrowseChildren } from '@/domain/model/child/browse-child.model'
+import { AlertTypeEnum } from '@/domain/enums/alert-type.enum'
+import { ReviewStatusEnum } from '@/domain/enums/review-status.enum'
+import { BrowseChildren } from '@/domain/models/child/browse-child.model'
 
 export interface BrowseChildrenParams {
-  page?: number
+  offset?: number
   limit?: number
   name?: string
   neighborhood?: string[]

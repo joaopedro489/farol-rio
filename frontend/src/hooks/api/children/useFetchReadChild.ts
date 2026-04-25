@@ -1,6 +1,6 @@
 import { readChild, ReadChildParams } from '@/services/children/read-child'
 import { useFetch } from '../useFetch'
-import { QueryKeyEnum } from '@/domain/enum/query-keys.enum'
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 
 export const useFetchReadChild = (params: ReadChildParams) => {
   const { data, ...response } = useFetch({
