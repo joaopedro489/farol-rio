@@ -4,10 +4,7 @@ export const ROUTES = {
       path: '/dashboard'
     },
     CHILDREN: {
-      path: '/children',
-      VIEW: {
-        path: '/children/view'
-      }
+      path: '/children'
     }
   },
   LOGIN: {
