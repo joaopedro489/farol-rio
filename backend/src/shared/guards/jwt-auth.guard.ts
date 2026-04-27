@@ -23,7 +23,7 @@ export class JwtAuthGuard extends AuthGuard('jwt-passport') {
   }
 
   handleRequest(err, params) {
-    if (err || !params.user) throw err || new UnauthorizedException()
+    if (err || !params?.user) throw err || new UnauthorizedException()
 
     this.context.set(ContextKey.USER, params.user)
 
