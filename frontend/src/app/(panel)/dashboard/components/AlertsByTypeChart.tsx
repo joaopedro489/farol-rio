@@ -26,7 +26,7 @@ export const AlertsByTypeChart = ({ data }: AlertsByTypeChartProps) => {
       <CardHeader className='flex items-start justify-between'>
         <div>
           <CardTitle>Alertas por área</CardTitle>
-          <CardDescription>Contagem de alertas ativos</CardDescription>
+          <CardDescription>Contagem de alertas ativos das crianças</CardDescription>
         </div>
       </CardHeader>
       <Separator />
