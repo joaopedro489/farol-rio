@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
-import { APP_INTERCEPTOR } from '@nestjs/core'
 import { LoginController } from './handlers/http/controllers/login.controller'
 import { JwtStrategy } from './handlers/http/strategies/jwt-strategy'
 import { AuthTokens } from './constants/tokens'

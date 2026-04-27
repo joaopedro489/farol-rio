@@ -44,7 +44,7 @@ export class JwtNestHandler implements JwtHandler {
     try {
       this.jwtService.verify(token, { secret })
       return true
-    } catch (e) {
+    } catch {
       return false
     }
   }

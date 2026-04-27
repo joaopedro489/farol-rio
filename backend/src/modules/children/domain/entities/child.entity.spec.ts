@@ -1,7 +1,4 @@
-import { Test } from '@nestjs/testing'
-
 import { Child } from './child.entity'
-import { ChildAlreadyReviewedError } from '../errors/children.error'
 import { AlertEnum } from '../types/enum/alert.enum'
 
 describe('Child', () => {

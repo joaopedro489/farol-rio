@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { SummaryService } from './summary.service'
 import { DashboardRepository } from '../../database/repository/dashboard.repository'
 import { DashboardTokens } from '../../constants/tokens'
-import { SummaryOutput } from '../../domain/outputs/summary.output'
 
 describe('SummaryService', () => {
   let sut: SummaryService
@@ -35,7 +34,7 @@ describe('SummaryService', () => {
       total: 100,
       reviewed: 40,
       pending: 60,
-    } as unknown as SummaryOutput
+    }
     vi.spyOn(repository, 'getSummary').mockResolvedValueOnce(summaryMock)
 
     const result = await sut.getSummary()

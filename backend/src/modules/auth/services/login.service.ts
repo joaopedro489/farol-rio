@@ -33,7 +33,7 @@ export class LoginService {
     const isPasswordValid = await user.validatePassword(password)
     if (!isPasswordValid) throw new WrongPasswordError()
 
-    const token = await this.jwtHandler.generateToken(user.id, user.email)
+    const token = this.jwtHandler.generateToken(user.id, user.email)
     return { token }
   }
 }

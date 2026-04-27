@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common'
+import { Body, Controller, Post } from '@nestjs/common'
 
 import { LoginPayload } from '../payload/login.payload'
 import { AuthSettingsRoutes } from '@/modules/auth/settings/routes'

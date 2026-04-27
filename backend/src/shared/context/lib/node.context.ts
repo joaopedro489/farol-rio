@@ -1,13 +1,15 @@
 import { AsyncLocalStorage } from 'async_hooks'
 
-export const asyncLocalStorage = new AsyncLocalStorage()
+type Store = Record<string, unknown>
 
-function get<T = any>(key: string): T {
-  return asyncLocalStorage.getStore()?.[key]
+export const asyncLocalStorage = new AsyncLocalStorage<Store>()
+
+function get<T = unknown>(key: string): T | undefined {
+  return asyncLocalStorage.getStore()?.[key] as T | undefined
 }
 
-function set<T = any>(key: string, value: T): void {
-  const store = asyncLocalStorage.getStore() || {}
+function set<T = unknown>(key: string, value: T): void {
+  const store = asyncLocalStorage.getStore() ?? {}
   store[key] = value
   asyncLocalStorage.enterWith(store)
 }

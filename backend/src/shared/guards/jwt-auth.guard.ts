@@ -6,8 +6,10 @@ import {
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { SharedTokens } from '../constants/tokens'
-import { Context } from '../context'
+import { Context, UserContext } from '../context'
 import { ContextKey } from '../context/types/enum/context-key.enum'
+
+type AuthParams = { user: UserContext | null } | false
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt-passport') {
@@ -22,11 +24,11 @@ export class JwtAuthGuard extends AuthGuard('jwt-passport') {
     return super.canActivate(context)
   }
 
-  handleRequest(err, params) {
-    if (err || !params?.user) throw err || new UnauthorizedException()
+  handleRequest<T = UserContext>(err: Error | null, params: AuthParams): T {
+    if (err || !params || !params.user) throw err || new UnauthorizedException()
 
     this.context.set(ContextKey.USER, params.user)
 
-    return params.user
+    return params.user as T
   }
 }

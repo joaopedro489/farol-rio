@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 
 import { SharedTokens } from '@/shared/constants/tokens'
 import { Context } from '@/shared/context/services/context.interface'
