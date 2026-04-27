@@ -1,4 +1,5 @@
 import { AlertEnum } from '@/domain/enums/alert.enum'
+import { calculateAgeLabel } from '@/utils/calculate-age'
 
 export type ChildHealth = {
   vaccinesUpToDate: boolean
@@ -26,7 +27,7 @@ export interface ChildModelConstructor {
   responsible: string
   isReviewed: boolean
   reviewedByEmail: string | null
-  reviewedDate: Date | null
+  reviewedAt: Date | null
   health: ChildHealth | null
   education: ChildEducation | null
   socialAssistance: ChildSocialAssistance | null
@@ -40,7 +41,7 @@ export class ChildModel {
   public readonly responsible: string
   public readonly isReviewed: boolean
   public readonly reviewedByEmail: string | null
-  public readonly reviewedDate: Date | null
+  public readonly reviewedAt: Date | null
   public readonly health: ChildHealth | null
   public readonly education: ChildEducation | null
   public readonly socialAssistance: ChildSocialAssistance | null
@@ -53,23 +54,14 @@ export class ChildModel {
     this.responsible = props?.responsible
     this.isReviewed = props?.isReviewed
     this.reviewedByEmail = props?.reviewedByEmail
-    this.reviewedDate = props?.reviewedDate
+    this.reviewedAt = props?.reviewedAt ? new Date(props?.reviewedAt) : null
     this.health = props?.health
     this.education = props?.education
     this.socialAssistance = props?.socialAssistance
   }
 
   get age(): string {
-    const today = new Date()
-    const birthDate = new Date(this.birthday)
-    let age = today.getFullYear() - birthDate.getFullYear()
-    const monthDifference = today.getMonth() - birthDate.getMonth()
-
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--
-    }
-
-    return `${age} anos e ${monthDifference} meses`
+    return calculateAgeLabel(this.birthday)
   }
 
   get initials(): string {

@@ -1,5 +1,4 @@
 import apiRequest from '@/lib/api'
-import { ChildModelConstructor } from '@/domain/models/child/child.model'
 
 export interface ReviewChildParams {
   id: string

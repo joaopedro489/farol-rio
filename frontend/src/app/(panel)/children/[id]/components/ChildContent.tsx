@@ -1,15 +1,17 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import { useParams } from 'next/navigation'
 import { ChildHeader } from './ChildHeader'
 import { useFetchReadChild } from '@/hooks/api/children/useFetchReadChild'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useMutateReviewChild } from '@/hooks/api/children/useMutateReviewChild'
 import { getCardChildData } from '../utils/get-card-child.data'
 import { ChildCard } from './ChildCard'
-import { HeartIcon } from 'lucide-react'
+import { Heart, BookOpen, HandHeart } from 'lucide-react'
 
 export const ChildContent = () => {
-  const router = useRouter()
-  const id = router.query.id as string
+  const params = useParams()
+  const id = params.id as string
   const { child, isLoading } = useFetchReadChild({ id })
 
   const { mutateAsync: reviewChild } = useMutateReviewChild()
@@ -19,7 +21,9 @@ export const ChildContent = () => {
 
   const { educationCard, healthCard, socialAssistanceCard } = getCardChildData(child)
 
-  if (isLoading) return <Skeleton className='w-full h-10 mb-4' />
+  const allNull = healthCard === null && educationCard === null && socialAssistanceCard === null
+
+  if (isLoading) return <Skeleton className='w-full h-100 mb-4' />
 
   return (
     <div>
@@ -31,32 +35,42 @@ export const ChildContent = () => {
         responsible={child?.responsible || ''}
         isReviewed={child?.isReviewed}
         reviewedBy={child?.reviewedByEmail || ''}
-        reviewedDate={child?.reviewedDate || undefined}
+        reviewedDate={child?.reviewedAt || undefined}
         onReview={handleReviewChild}
       />
-      <div className='h-px w-full bg-muted my-6 flex flex-row'>
+      <div className='mt-6 grid grid-cols-1 md:grid-cols-3 gap-4'>
         <ChildCard
-          Icon={HeartIcon}
+          Icon={Heart}
           activeAlerts={child?.health?.alerts || []}
           body={healthCard || []}
           label='Saúde'
           isNull={healthCard === null}
         />
         <ChildCard
-          Icon={HeartIcon}
+          Icon={BookOpen}
           activeAlerts={child?.education?.alerts || []}
           body={educationCard || []}
           label='Educação'
           isNull={educationCard === null}
         />
         <ChildCard
-          Icon={HeartIcon}
+          Icon={HandHeart}
           activeAlerts={child?.socialAssistance?.alerts || []}
           body={socialAssistanceCard || []}
           label='Assistência Social'
           isNull={socialAssistanceCard === null}
         />
       </div>
+      {allNull && child && (
+        <div className='mt-4 bg-attention-soft text-attention rounded-md p-4'>
+          <p className='text-sm font-semibold'>Cobertura incompleta nas três áreas</p>
+          <p className='text-sm mt-1'>
+            {child.name} está cadastrada no painel, mas ainda não há registros nos sistemas de
+            saúde, educação ou assistência social. Solicite vínculo aos sistemas de origem antes de
+            revisar.
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle
@@ -22,16 +23,19 @@ export const ChildModalConfirmation = ({ open, onOpenChange, onConfirm }: Props)
           <DialogTitle>Marcar como revisado</DialogTitle>
         </DialogHeader>
 
-        <p className='text-sm text-muted-foreground'>
+        <DialogDescription>
           Tem certeza que deseja marcar esta criança como revisada? Esta ação não pode ser desfeita.
-        </p>
+        </DialogDescription>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant='outline'>Cancelar</Button>
+            <Button variant='outline' className='cursor-pointer'>
+              Cancelar
+            </Button>
           </DialogClose>
 
           <Button
+            className='cursor-pointer'
             variant='default'
             onClick={() => {
               onConfirm()

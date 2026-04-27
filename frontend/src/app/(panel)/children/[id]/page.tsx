@@ -1,10 +1,9 @@
-export const ChildPage = () => {
+import { ChildContent } from './components/ChildContent'
+
+export default function ChildPage() {
   return (
-    <>
-      <div className='p-6 space-y-6'>
-        <h1 className='text-2xl font-bold'>Detalhes da criança</h1>
-        <p>Em breve...</p>
-      </div>
-    </>
+    <div className='p-6'>
+      <ChildContent />
+    </div>
   )
 }
