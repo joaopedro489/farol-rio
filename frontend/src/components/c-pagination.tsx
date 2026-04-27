@@ -10,13 +10,13 @@ import {
 } from '@/components/ui/pagination'
 
 type Props = {
-  offset: number
+  page: number
   totalPages: number
   totalCount?: number
   onChange: (page: number) => void
 }
 
-export const CPagination = ({ offset: page, totalPages, totalCount, onChange }: Props) => {
+export const CPagination = ({ page, totalPages, totalCount, onChange }: Props) => {
   if (totalPages <= 1) return null
 
   return (
@@ -28,7 +28,11 @@ export const CPagination = ({ offset: page, totalPages, totalCount, onChange }: 
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
             <PaginationItem key={p}>
-              <PaginationLink isActive={p === page} onClick={() => onChange(p)}>
+              <PaginationLink
+                isActive={p === page}
+                onClick={() => onChange(p)}
+                className={p === page ? 'border-foreground font-semibold' : 'border border-border'}
+              >
                 {p}
               </PaginationLink>
             </PaginationItem>
