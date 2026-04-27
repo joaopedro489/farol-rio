@@ -24,6 +24,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const saved = (localStorage.getItem('theme') as ThemeEnum | null) ?? ThemeEnum.LIGHT
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration: localStorage só existe no cliente
     setThemeState(saved)
     document.documentElement.classList.toggle('dark', saved === ThemeEnum.DARK)
   }, [])

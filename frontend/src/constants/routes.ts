@@ -9,5 +9,8 @@ export const ROUTES = {
   },
   LOGIN: {
     path: '/login'
+  },
+  SESSION_EXPIRED: {
+    path: '/session-expired'
   }
 }

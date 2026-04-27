@@ -24,8 +24,7 @@ export const PanelNavbar = () => {
       <ThemeSwitch />
       <Separator orientation='vertical' className='h-8' />
       <div className='text-right'>
-        <p className='text-sm font-medium leading-tight'>Técnico - Prefeitura</p>
-        <p className='text-xs text-muted-foreground'>{auth.preferredUsername}</p>
+        <p className='text-sm font-medium leading-tight'>{auth.preferredUsername}</p>
       </div>
       <button
         onClick={handleLogout}
