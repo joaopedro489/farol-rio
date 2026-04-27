@@ -34,7 +34,7 @@ class AuthStorageClass {
 
   private hydrate(token: string) {
     const payload = JSON.parse(atob(token.split('.')[1]))
-    console.log('Hydrating auth state with payload:', payload)
+
     this.accessToken = token
     this.data = {
       preferredUsername: payload.preferredUsername,
