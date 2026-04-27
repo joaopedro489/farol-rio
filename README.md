@@ -92,6 +92,8 @@ cp .env.example .env
 yarn dev
 ```
 
+OBS.: para rodar o backend localmente, é necessário se atentar para a variável `DATABASE_URL` do `.env`, que deve apontar para o banco Postgres rodando no Docker (ex: `postgresql://root:password@localhost:5432/farol`).
+
 ## O que faria diferente com mais tempo
 
 Com mais tempo, a primeira frente seria fechar as lacunas de qualidade e visualização: adicionar testes de componentes no frontend para cobrir os fluxos principais da interface (e não apenas a lógica do backend), e implementar um mapa de calor no dashboard para dar uma leitura geográfica dos alertas por bairro, complementando os gráficos atuais.

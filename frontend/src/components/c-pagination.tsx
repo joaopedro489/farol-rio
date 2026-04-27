@@ -17,8 +17,6 @@ type Props = {
 }
 
 export const CPagination = ({ page, totalPages, totalCount, onChange }: Props) => {
-  if (totalPages <= 1) return null
-
   return (
     <div className='flex items-center justify-between gap-4 flex-wrap'>
       <Pagination className='mx-0 w-auto'>
