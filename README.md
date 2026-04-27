@@ -61,7 +61,11 @@ E optei por trabalhar com um banco de dados relacional, sendo ele o Postgres, pa
 **Tudo em Docker (recomendado):**
 
 ```
+cd backend
 cp .env.example .env
+cd ../frontend
+cp .env.example .env
+cd ..
 docker compose up -d --build
 ```
 
