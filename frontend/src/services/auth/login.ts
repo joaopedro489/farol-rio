@@ -12,7 +12,7 @@ interface ILoginResponse {
 export const login = async (body: ILoginPayload) => {
   const response = (await apiRequest<ILoginResponse>({
     method: 'POST',
-    path: 'login',
+    path: 'auth/login',
     body,
     throwError: true
   })) as ILoginResponse

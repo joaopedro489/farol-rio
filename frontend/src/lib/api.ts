@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/routes'
 import { AuthStorage } from '@/services/AuthStorage'
 import axios, { AxiosError } from 'axios'
 
-export interface TRequest<T = unknown> {
+export interface TRequest {
   path: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
   body?: any
@@ -34,27 +34,19 @@ instance.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
+      const hadSession = !!AuthStorage.getAccessToken()
       AuthStorage.logout()
-      window.location.href = ROUTES.LOGIN.path
+      window.location.href = hadSession ? ROUTES.SESSION_EXPIRED.path : ROUTES.LOGIN.path
     }
     return Promise.reject(error)
   }
 )
 
 function bindPathParams(path: string, pathParams: Record<string, any>): string {
-  return Object.keys(pathParams).reduce((result, key) => {
-    return result.replace(new RegExp(`:${key}`, 'g'), pathParams[key])
-  }, path)
-}
-
-function buildQueryString(queryParams: Record<string, any>): string {
-  return Object.entries(queryParams)
-    .filter(
-      ([, value]) => value !== undefined && value !== null && value !== '' && value?.length !== 0
-    )
-    .reduce((query, [key, value]) => {
-      return query ? `${query}&${key}=${value}` : `?${key}=${value}`
-    }, '')
+  return Object.entries(pathParams).reduce(
+    (result, [key, value]) => result.replaceAll(`:${key}`, String(value)),
+    path
+  )
 }
 
 async function apiRequest<T = unknown>({
@@ -65,13 +57,17 @@ async function apiRequest<T = unknown>({
   pathParams,
   headers: extraHeaders,
   throwError
-}: TRequest<T>): Promise<T | RequestError> {
-  const boundPath = pathParams ? bindPathParams(path, pathParams) : path
-  const query = queryParams ? buildQueryString(queryParams) : ''
-  const url = `${boundPath}${query}`
+}: TRequest): Promise<T | RequestError> {
+  const url = pathParams ? bindPathParams(path, pathParams) : path
 
   try {
-    const response = await instance({ method, url, data, headers: extraHeaders })
+    const response = await instance({
+      method,
+      url,
+      data,
+      params: queryParams,
+      headers: extraHeaders
+    })
     return response.data as T
   } catch (error: unknown) {
     if (throwError) throw error

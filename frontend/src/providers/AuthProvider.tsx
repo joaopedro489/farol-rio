@@ -19,7 +19,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = useQueryClient()
 
   useEffect(() => {
+    console.log('Hydrating auth state from localStorage...')
     const data = AuthStorage.get()
+    console.log('Retrieved data from localStorage:', data)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration de localStorage; setIsLoaded sinaliza fim da hidratação
     if (data) setAuth(data)
     setIsLoaded(true)
   }, [])

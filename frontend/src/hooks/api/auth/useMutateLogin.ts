@@ -16,7 +16,6 @@ export const useMutateLogin = () => {
     },
     onError: () => {
       toast.error('Credenciais inválidas')
-      return
     }
   })
 

@@ -10,24 +10,12 @@ class AuthStorageClass {
   constructor() {
     if (typeof window === 'undefined') return
     const token = localStorage.getItem('AT')
-    if (token) {
-      this.accessToken = token
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      this.data = {
-        preferredUsername: payload.preferred_username,
-        userId: payload.sub,
-      }
-    }
+    if (token) this.hydrate(token)
   }
 
   set(token: string) {
     localStorage.setItem('AT', token)
-    const payload = JSON.parse(atob(token.split('.')[1]))
-    this.accessToken = token
-    this.data = {
-      preferredUsername: payload.preferred_username,
-      userId: payload.sub,
-    }
+    this.hydrate(token)
   }
 
   get() {
@@ -42,6 +30,16 @@ class AuthStorageClass {
     localStorage.removeItem('AT')
     this.accessToken = undefined
     this.data = undefined
+  }
+
+  private hydrate(token: string) {
+    const payload = JSON.parse(atob(token.split('.')[1]))
+    console.log('Hydrating auth state with payload:', payload)
+    this.accessToken = token
+    this.data = {
+      preferredUsername: payload.preferredUsername,
+      userId: payload.sub
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { LoginContent } from './components/LoginContent'
 
-export const LoginPage = () => {
+export default function LoginPage() {
   return (
     <>
       <LoginContent />

@@ -9,6 +9,8 @@ import { useMutateLogin } from '@/hooks/api/auth/useMutateLogin'
 
 import { LoginForm } from './LoginForm'
 import { LeftSideLogin } from './LeftSideLogin'
+import { useRouter } from 'next/navigation'
+import { ROUTES } from '@/constants/routes'
 
 const schema = z.object({
   email: z.email('Email inválido').min(1, 'Email obrigatório'),
@@ -19,6 +21,7 @@ export type LoginFormData = z.infer<typeof schema>
 
 export const LoginContent = () => {
   const { mutate, isPending } = useMutateLogin()
+  const router = useRouter()
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(schema),
@@ -26,7 +29,9 @@ export const LoginContent = () => {
   })
 
   const onSubmit = (data: LoginFormData) => {
-    mutate(data)
+    mutate(data, {
+      onSuccess: () => router.push(ROUTES.AUTHENTICATED.DASHBOARD.path)
+    })
   }
 
   return (
