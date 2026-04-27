@@ -5,6 +5,7 @@ import { ContextModule } from './shared/context/context.module'
 import { AuthModule } from './modules/auth/auth.module'
 import { DashboardModule } from './modules/dashboard/dashboard.module'
 import { ChildrenModule } from './modules/children/children.module'
+import { AppTestModule } from './modules/app/app.module'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ChildrenModule } from './modules/children/children.module'
     AuthModule,
     DashboardModule,
     ChildrenModule,
+    AppTestModule,
   ],
   providers: [],
 })
