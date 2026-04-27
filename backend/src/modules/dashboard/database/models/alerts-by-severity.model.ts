@@ -1,11 +1,16 @@
 import { Prisma } from '@/generated/prisma/client'
 import { AlertsBySeverityOutput } from '../../domain/outputs/alerts-by-severity.output'
 
+type AlertFlags = { alerts?: unknown[] }
+
 type AlertFlagsModelConstructor = {
   health: Prisma.JsonValue | typeof Prisma.DbNull
   education: Prisma.JsonValue | typeof Prisma.DbNull
   social_assistance: Prisma.JsonValue | typeof Prisma.DbNull
 }
+
+const alertsLength = (value: Prisma.JsonValue | typeof Prisma.DbNull): number =>
+  (value as AlertFlags)?.alerts?.length ?? 0
 
 export class AlertsBySeverityModel {
   static toOutput(
@@ -15,9 +20,9 @@ export class AlertsBySeverityModel {
 
     for (const child of children) {
       const count =
-        (child.health != Prisma.DbNull ? 1 : 0) +
-        (child.education != Prisma.DbNull ? 1 : 0) +
-        (child.social_assistance != Prisma.DbNull ? 1 : 0)
+        alertsLength(child.health) +
+        alertsLength(child.education) +
+        alertsLength(child.social_assistance)
 
       if (count === 0) acc.none++
       else if (count === 1) acc.one++

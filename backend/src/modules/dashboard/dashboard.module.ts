@@ -10,8 +10,12 @@ import { AlertsByNeighborhoodService } from './services/alerts-by-neighborhood/a
 import { AlertsBySeverityService } from './services/alerts-by-severity/alerts-by-severity.service'
 import { AlertsByTypeService } from './services/alerts-by-type/alerts-by-type.service'
 import { SummaryService } from './services/summary/summary.service'
+import { PrismaService } from '@/shared/database/prisma.service'
+import { ContextModule } from '@/shared/context/context.module'
+import { JwtAuthGuard } from '@/shared/guards/jwt-auth.guard'
 
 @Module({
+  imports: [ContextModule],
   controllers: [
     SummaryController,
     AlertsByTypeController,
@@ -19,7 +23,9 @@ import { SummaryService } from './services/summary/summary.service'
     AlertsByNeighborhoodController,
   ],
   providers: [
+    JwtAuthGuard,
     SummaryService,
+    PrismaService,
     AlertsByTypeService,
     AlertsBySeverityService,
     AlertsByNeighborhoodService,

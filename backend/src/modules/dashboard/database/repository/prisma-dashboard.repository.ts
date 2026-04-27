@@ -13,6 +13,7 @@ import { AlertsByTypeModel } from '../models/alerts-by-type.model'
 import { SummaryModel } from '../models/summary.model'
 
 import { DashboardRepository } from './dashboard.repository'
+import { AlertTypeEnum } from '../../domain/types/alert-type.enum'
 
 @Injectable()
 export class PrismaDashboardRepository implements DashboardRepository {
@@ -29,15 +30,9 @@ export class PrismaDashboardRepository implements DashboardRepository {
 
   async getAlertsByType(): Promise<AlertsByTypeOutput> {
     const [health, education, socialAssistance] = await Promise.all([
-      this.prisma.child.count({
-        where: { health: { not: Prisma.DbNull } },
-      }),
-      this.prisma.child.count({
-        where: { education: { not: Prisma.DbNull } },
-      }),
-      this.prisma.child.count({
-        where: { social_assistance: { not: Prisma.DbNull } },
-      }),
+      this.getAlertsByTypeCount(AlertTypeEnum.HEALTH),
+      this.getAlertsByTypeCount(AlertTypeEnum.EDUCATION),
+      this.getAlertsByTypeCount(AlertTypeEnum.SOCIAL_ASSISTANCE),
     ])
 
     return AlertsByTypeModel.toOutput({ health, education, socialAssistance })
@@ -64,5 +59,21 @@ export class PrismaDashboardRepository implements DashboardRepository {
     })
 
     return AlertsByNeighborhoodModel.toOutput(rows)
+  }
+
+  private async getAlertsByTypeCount(type: AlertTypeEnum): Promise<number> {
+    const column =
+      type === AlertTypeEnum.HEALTH
+        ? 'health'
+        : type === AlertTypeEnum.EDUCATION
+          ? 'education'
+          : 'social_assistance'
+
+    const result = await this.prisma.$queryRaw<{ count: number }[]>`
+      SELECT COUNT(*)::integer AS count FROM "children"
+      WHERE jsonb_array_length(${Prisma.raw(column)}->'alerts') > 0
+    `
+
+    return result[0].count
   }
 }
