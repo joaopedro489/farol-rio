@@ -46,6 +46,8 @@ E optei por trabalhar com um banco de dados relacional, sendo ele o Postgres, pa
 
 - **Tratamento de Erros**: No backend criei classes de erro personalizadas (ex: `UserNotFoundError`, `WrongPasswordError`, `ChildAlreadyReviewedError`) para deixar cada cenário explícito e fácil de mapear. No frontend, os erros são tratados de forma simples, com mensagens de feedback ao usuário quando algo dá errado.
 
+- **Dockerfile no backend**: Optei por deixar o comando `npx prisma migrate reset --force` no `Dockerfile` para limpar o banco a cada build, garantindo um ambiente consistente para desenvolvimento e testes. O trade-off é que isso não é ideal para produção, onde perderíamos os dados a cada deploy, mas para o contexto do desafio e desenvolvimento local, achei que valia a pena pela praticidade.
+
 ## URL de Deploy
 
 - frontend: https://farol-rio.vercel.app/
