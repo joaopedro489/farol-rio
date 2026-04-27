@@ -48,6 +48,8 @@ E optei por trabalhar com um banco de dados relacional, sendo ele o Postgres, pa
 
 - **Dockerfile no backend**: Optei por deixar o comando `npx prisma migrate reset --force` no `Dockerfile` para limpar o banco a cada build, garantindo um ambiente consistente para desenvolvimento e testes. Sei que isso não é ideal para produção, onde perderíamos os dados a cada deploy, e eu não optaria em manter esse comando em um Dockerfile de um projeto real mas para o contexto do desafio e desenvolvimento local, achei que valia a pena pela praticidade.
 
+- **Observabilidade**: Para monitorar a aplicação, optei por criar um LoggerInterceptor no backend que loga todas as requisições recebidas, incluindo método, path, ip do cliente, query params e corpo da requisição. Com isso, é possível ter uma visibilidade da API. Eu compreendo que isso traz um período maior de desenvolvimento e pode não ser essencial para um projeto desse porte, mas acredito que a observabilidade é um aspecto importante para qualquer aplicação, mesmo em estágio inicial, e quis incluir essa funcionalidade para demonstrar essa preocupação.
+
 ## URL de Deploy
 
 - frontend: https://farol-rio.vercel.app/
