@@ -23,12 +23,12 @@ export function FilterMultiSelect<T extends string>({
   value,
   onChange
 }: Props<T>) {
-  const current =
-    value.length === 0
-      ? allLabel
-      : value.length === 1
-        ? (options.find((o) => o.value === value[0])?.label ?? value[0])
-        : `${value.length} selecionados`
+  const getCurrentLabel = () => {
+    if (value.length === 0) return allLabel
+    if (value.length === 1) return options.find((o) => o.value === value[0])?.label ?? value[0]
+    return `${value.length} selecionados`
+  }
+  const current = getCurrentLabel()
 
   const toggle = (v: T) => {
     onChange(value.includes(v) ? value.filter((x) => x !== v) : [...value, v])

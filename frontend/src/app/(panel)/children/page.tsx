@@ -1,9 +1,10 @@
+import { Suspense } from 'react'
 import { ChildrenContent } from './components/ChildrenContent'
 
-export const ChildrenPage = () => {
+export default function ChildrenPage() {
   return (
-    <>
+    <Suspense>
       <ChildrenContent />
-    </>
+    </Suspense>
   )
 }

@@ -16,7 +16,11 @@ export const browseChildren = async (params: BrowseChildrenParams): Promise<Brow
   const response = (await apiRequest<BrowseChildren>({
     method: 'GET',
     path: '/api/children',
-    queryParams: params,
+    queryParams: {
+      ...params,
+      neighborhood: params.neighborhood?.join(','),
+      type: params.type?.join(',')
+    },
     throwError: true
   })) as BrowseChildren
 

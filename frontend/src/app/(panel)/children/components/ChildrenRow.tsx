@@ -16,9 +16,7 @@ export const ChildrenRow = ({ child, onClick }: Props) => {
     <TableRow className={cn('cursor-pointer', onClick && 'hover:bg-muted/50')} onClick={onClick}>
       <TableCell>
         <p className='font-medium leading-tight'>{child.name}</p>
-        <p className='text-xs text-muted-foreground mt-0.5'>
-          {child.id} - {child.age} anos
-        </p>
+        <p className='text-xs text-muted-foreground mt-0.5'>{child.age}</p>
       </TableCell>
       <TableCell className='text-sm'>{child.neighborhood}</TableCell>
       <TableCell>

@@ -9,7 +9,7 @@ import { NotFound } from '@/components/not-found'
 import { CPagination } from '@/components/c-pagination'
 
 export type ChildrenTableProps = {
-  children: BrowseChildItem[]
+  items: BrowseChildItem[]
   total: number
   limit?: number
   offset?: number
@@ -19,7 +19,7 @@ export type ChildrenTableProps = {
 }
 
 export const ChildrenTable = ({
-  children,
+  items,
   total,
   limit = limitDefault,
   offset = 0,
@@ -28,7 +28,7 @@ export const ChildrenTable = ({
   onChangePage
 }: ChildrenTableProps) => {
   if (isLoading) return <Skeleton className='w-full h-10 rounded-md' />
-  if (children.length === 0) return <NotFound />
+  if (items.length === 0) return <NotFound />
 
   return (
     <div className='space-y-4'>
@@ -44,14 +44,14 @@ export const ChildrenTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {children.map((child) => (
+          {items.map((child) => (
             <ChildrenRow key={child.id} child={child} onClick={() => onClickRow?.(child.id)} />
           ))}
         </TableBody>
       </Table>
 
       <CPagination
-        offset={Math.floor(offset / limit) + 1}
+        page={Math.floor(offset / limit) + 1}
         totalPages={Math.ceil(total / limit)}
         totalCount={total}
         onChange={(p) => onChangePage?.((p - 1) * limit)}

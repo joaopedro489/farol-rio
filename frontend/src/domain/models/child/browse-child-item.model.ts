@@ -1,11 +1,13 @@
+import { calculateAgeLabel } from '@/utils/calculate-age'
+
 export interface BrowseChildItemConstructor {
   id: string
   name: string
   birthday: Date
   neighborhood: string
-  isHealthWithAlert: boolean
-  isEducationWithAlert: boolean
-  isAssistanceWithAlert: boolean
+  isHealthWithAlert: boolean | null
+  isEducationWithAlert: boolean | null
+  isAssistanceWithAlert: boolean | null
   status: boolean
 }
 
@@ -14,9 +16,9 @@ export class BrowseChildItem {
   name: string
   birthday: Date
   neighborhood: string
-  isHealthWithAlert: boolean
-  isEducationWithAlert: boolean
-  isAssistanceWithAlert: boolean
+  isHealthWithAlert: boolean | null
+  isEducationWithAlert: boolean | null
+  isAssistanceWithAlert: boolean | null
   status: boolean
 
   constructor({
@@ -33,9 +35,9 @@ export class BrowseChildItem {
     name: string
     birthday: Date
     neighborhood: string
-    isHealthWithAlert: boolean
-    isEducationWithAlert: boolean
-    isAssistanceWithAlert: boolean
+    isHealthWithAlert: boolean | null
+    isEducationWithAlert: boolean | null
+    isAssistanceWithAlert: boolean | null
     status: boolean
   }) {
     this.id = id
@@ -49,15 +51,6 @@ export class BrowseChildItem {
   }
 
   get age(): string {
-    const today = new Date()
-    const birthDate = new Date(this.birthday)
-    let age = today.getFullYear() - birthDate.getFullYear()
-    const monthDifference = today.getMonth() - birthDate.getMonth()
-
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-      age--
-    }
-
-    return `${age} anos e ${monthDifference} meses`
+    return calculateAgeLabel(this.birthday)
   }
 }

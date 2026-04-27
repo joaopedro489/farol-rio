@@ -4,9 +4,11 @@ import { useRouter } from 'next/navigation'
 import { useFetchBrowseChildren } from '@/hooks/api/children/useFetchBrowseChildren'
 import { limit } from '@/constants/api'
 import { ChildrenTable } from './ChildrenTable'
+import { ChildrenMobileList } from './ChildrenMobileList'
 import { ChildrenFiltersBar } from './ChildrenFilters'
 import { useChildrenFilters } from '../hooks/useChildrenFilters'
 import { ROUTES } from '@/constants/routes'
+import { convertToArray } from '@/utils/convert-to-array'
 
 export const ChildrenContent = () => {
   const router = useRouter()
@@ -14,8 +16,8 @@ export const ChildrenContent = () => {
 
   const { children, isLoading } = useFetchBrowseChildren({
     name: filters.name,
-    neighborhood: filters.neighborhood.length ? filters.neighborhood : undefined,
-    type: filters.type.length ? filters.type : undefined,
+    neighborhood: filters.neighborhood.length ? convertToArray(filters.neighborhood) : undefined,
+    type: filters.type.length ? convertToArray(filters.type) : undefined,
     statusReview: filters.statusReview,
     offset: filters.offset,
     limit
@@ -30,20 +32,29 @@ export const ChildrenContent = () => {
       <div>
         <h1 className='text-2xl font-semibold'>Crianças acompanhadas</h1>
       </div>
-      <ChildrenFiltersBar
-        filters={filters}
-        neighborhoods={children?.neighborhoods ?? []}
-        onSetFilters={setFilters}
-      />
-      <ChildrenTable
-        children={children?.items ?? []}
-        total={children?.total ?? 0}
-        limit={limit}
-        offset={filters.offset}
-        isLoading={isLoading}
-        onClickRow={handleClickRow}
-        onChangePage={setOffset}
-      />
+      <ChildrenFiltersBar filters={filters} onSetFilters={setFilters} />
+      <div className='hidden md:block'>
+        <ChildrenTable
+          items={children?.items ?? []}
+          total={children?.total ?? 0}
+          limit={limit}
+          offset={filters.offset}
+          isLoading={isLoading}
+          onClickRow={handleClickRow}
+          onChangePage={setOffset}
+        />
+      </div>
+      <div className='block md:hidden'>
+        <ChildrenMobileList
+          item={children?.items ?? []}
+          total={children?.total ?? 0}
+          limit={limit}
+          offset={filters.offset}
+          isLoading={isLoading}
+          onClickRow={handleClickRow}
+          onChangePage={setOffset}
+        />
+      </div>
     </div>
   )
 }
