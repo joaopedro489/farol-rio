@@ -41,7 +41,13 @@ export const PanelSidebar = () => {
             <SidebarMenu>
               {MENU_ITEMS.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname.startsWith(item.url)}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname.startsWith(item.url)}
+                    className={
+                      pathname.startsWith(item.url) ? 'bg-primary text-primary-foreground' : ''
+                    }
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

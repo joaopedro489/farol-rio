@@ -86,8 +86,8 @@
   --sidebar-foreground:         var(--c-text);
   --sidebar-primary:            var(--c-primary);
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent:             var(--c-surface-alt);
-  --sidebar-accent-foreground:  var(--c-text);
+  --sidebar-accent:             var(--c-primary-soft);
+  --sidebar-accent-foreground:  var(--c-primary);
   --sidebar-border:             var(--c-border);
   --sidebar-ring:               var(--c-primary);
 }

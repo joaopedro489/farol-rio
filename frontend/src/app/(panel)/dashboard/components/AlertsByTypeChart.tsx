@@ -23,7 +23,7 @@ export const AlertsByTypeChart = ({ data }: AlertsByTypeChartProps) => {
 
   return (
     <Card>
-      <CardHeader className='flex flex-row items-start justify-between'>
+      <CardHeader className='flex items-start justify-between'>
         <div>
           <CardTitle>Alertas por área</CardTitle>
           <CardDescription>Contagem de alertas ativos</CardDescription>
@@ -31,7 +31,7 @@ export const AlertsByTypeChart = ({ data }: AlertsByTypeChartProps) => {
       </CardHeader>
       <Separator />
       <CardContent>
-        <ChartContainer config={config} className='h-45 w-full aspect-auto'>
+        <ChartContainer config={config} className='h-45 w-full'>
           <BarChart data={items} layout='vertical' margin={{ left: 16, right: 32 }}>
             <XAxis type='number' hide />
             <YAxis

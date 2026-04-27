@@ -42,7 +42,7 @@ export const ChildrenMobileList = ({
             className='cursor-pointer hover:bg-muted/50 transition-colors'
             onClick={() => onClickRow?.(child.id)}
           >
-            <CardHeader className='flex flex-row items-start justify-between gap-2'>
+            <CardHeader className='flex items-start justify-between gap-2'>
               <div>
                 <p className='font-medium text-sm leading-tight'>{child.name}</p>
                 <div className='flex items-center gap-1 mt-0.5 text-xs text-muted-foreground'>

@@ -23,7 +23,7 @@ export const SummaryDonut = ({ summary }: SummaryDonutProps) => {
     <Card>
       <CardContent className='flex items-center gap-4'>
         <div className='relative h-32 w-32 shrink-0'>
-          <ChartContainer config={config} className='h-32 w-32 aspect-square'>
+          <ChartContainer config={config} className='h-32 w-32'>
             <RadialBarChart
               data={[{ value: percent }]}
               innerRadius='75%'

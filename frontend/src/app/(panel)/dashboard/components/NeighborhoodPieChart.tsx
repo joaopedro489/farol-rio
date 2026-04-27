@@ -24,7 +24,7 @@ export const NeighborhoodPieChart = ({ data }: NeighborhoodPieChartProps) => {
 
   return (
     <Card>
-      <CardHeader className='flex flex-row items-start justify-between'>
+      <CardHeader className='flex items-start justify-between'>
         <div>
           <CardTitle>Concentração por bairro</CardTitle>
           <CardDescription>{data.length} bairros atendidos</CardDescription>
@@ -33,7 +33,7 @@ export const NeighborhoodPieChart = ({ data }: NeighborhoodPieChartProps) => {
       <Separator />
       <CardContent>
         <div className='flex flex-col md:flex-row gap-6 md:items-center'>
-          <ChartContainer config={config} className='h-50 w-full md:w-50 md:shrink-0 aspect-square'>
+          <ChartContainer config={config} className='h-50 w-full md:w-50 md:shrink-0'>
             <PieChart>
               <Pie
                 data={colored}

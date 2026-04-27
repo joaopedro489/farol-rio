@@ -24,7 +24,7 @@ export const AlertsBySeverityChart = ({ data }: AlertsBySeverityChartProps) => {
 
   return (
     <Card>
-      <CardHeader className='flex flex-row items-start justify-between'>
+      <CardHeader className='flex items-start justify-between'>
         <div>
           <CardTitle>Nível de alerta</CardTitle>
           <CardDescription>Saúde - Educação - Assistência cruzadas</CardDescription>
@@ -32,7 +32,7 @@ export const AlertsBySeverityChart = ({ data }: AlertsBySeverityChartProps) => {
       </CardHeader>
       <Separator />
       <CardContent>
-        <ChartContainer config={config} className='h-45 w-full aspect-auto'>
+        <ChartContainer config={config} className='h-45 w-full'>
           <BarChart data={items} layout='vertical' margin={{ left: 16, right: 32 }}>
             <XAxis type='number' hide />
             <YAxis

@@ -5,6 +5,7 @@ import { QueryProvider } from '../providers/QueryProvider'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
 import { AuthProvider } from '@/providers/AuthProvider'
+import { AuthGuard } from './components/AuthGuard'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -32,7 +33,9 @@ export default function RootLayout({
       <body className='min-h-full flex flex-col'>
         <QueryProvider>
           <AuthProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <ThemeProvider>
+              <AuthGuard>{children}</AuthGuard>
+            </ThemeProvider>
             <Toaster />
           </AuthProvider>
         </QueryProvider>

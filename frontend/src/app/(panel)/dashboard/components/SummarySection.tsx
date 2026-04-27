@@ -9,7 +9,7 @@ type SummarySectionProps = {
 export const SummarySection = ({ summary }: SummarySectionProps) => {
   return (
     <>
-      <div className='hidden md:flex md:flex-row gap-4'>
+      <div className='hidden md:flex gap-4'>
         <div className='flex-1'>
           <StatCard
             label='Total acompanhado'

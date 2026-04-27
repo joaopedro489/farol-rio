@@ -10,13 +10,7 @@ export default function Home() {
   const { auth, isLoaded } = useAuth()
 
   useEffect(() => {
-    console.log('Auth state:', auth?.userId ? 'Authenticated' : 'Unauthenticated')
-    console.log(isLoaded)
     if (!isLoaded) return
-    console.log(
-      'Redirecting to:',
-      auth?.userId ? ROUTES.AUTHENTICATED.DASHBOARD.path : ROUTES.LOGIN.path
-    )
     router.replace(auth?.userId ? ROUTES.AUTHENTICATED.DASHBOARD.path : ROUTES.LOGIN.path)
   }, [isLoaded, auth?.userId, router])
 

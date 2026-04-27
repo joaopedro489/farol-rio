@@ -37,7 +37,7 @@ export function FilterMultiSelect<T extends string>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border border-border bg-background hover:bg-muted transition-colors'>
+        <button className='flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border border-border bg-background hover:bg-muted transition-colors cursor-pointer'>
           <span className='text-muted-foreground'>{label}:</span>
           <span className='font-medium'>{current}</span>
           <ChevronDown size={13} className='text-muted-foreground' />
@@ -46,6 +46,7 @@ export function FilterMultiSelect<T extends string>({
       <DropdownMenuContent align='start'>
         {options.map((opt) => (
           <DropdownMenuCheckboxItem
+            className='cursor-pointer'
             key={opt.value}
             checked={value.includes(opt.value)}
             onCheckedChange={() => toggle(opt.value)}
