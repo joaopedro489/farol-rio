@@ -7,6 +7,7 @@ import { AuthTokens } from './constants/tokens'
 import { LoginService } from './services/login.service'
 import { JwtNestHandler } from './adapters/jwt-handlers'
 import { PrismaUserRepository } from './database/repository/prisma-user.repository'
+import { PrismaService } from '@/shared/database/prisma.service'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PrismaUserRepository } from './database/repository/prisma-user.reposito
   controllers: [LoginController],
   providers: [
     JwtStrategy,
+    PrismaService,
     LoginService,
     {
       provide: AuthTokens.UserRepository,

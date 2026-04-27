@@ -35,9 +35,9 @@ export class JwtNestHandler implements JwtHandler {
     expiresIn,
   }: JwtHandler.GenerateParams) {
     return this.jwtService.sign<{
-      userId: number
+      sub: number
       preferredUsername: string
-    }>({ userId, preferredUsername }, { secret, expiresIn })
+    }>({ sub: userId, preferredUsername }, { secret, expiresIn })
   }
 
   private verify({ secret, token }: JwtHandler.ValidateParams) {

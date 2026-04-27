@@ -27,9 +27,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt-passport') {
     })
   }
 
-  async validate({ userId }: JWTType): ValidateReturn {
+  async validate({ sub }: JWTType): ValidateReturn {
     const userContext: UserContext | null =
-      await this.userRepository.findUserContextById(userId)
+      await this.userRepository.findUserContextById(sub)
     if (!userContext) return false
 
     return {

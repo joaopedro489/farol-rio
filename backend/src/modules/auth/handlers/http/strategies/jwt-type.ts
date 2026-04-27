@@ -1,4 +1,4 @@
 export interface JWTType {
-  userId: number
+  sub: number
   preferredUsername: string
 }
