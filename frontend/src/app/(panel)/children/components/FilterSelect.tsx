@@ -27,7 +27,7 @@ export function FilterSelect<T extends string>({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className='cursor-pointer'>
         <button className='flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border border-border bg-background hover:bg-muted transition-colors'>
           <span className='text-muted-foreground'>{label}:</span>
           <span className='font-medium'>{current}</span>
