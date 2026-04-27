@@ -35,9 +35,15 @@ export function FilterSelect<T extends string>({
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='start'>
-        <DropdownMenuItem onClick={() => onChange(undefined)}>{allLabel}</DropdownMenuItem>
+        <DropdownMenuItem className='cursor-pointer' onClick={() => onChange(undefined)}>
+          {allLabel}
+        </DropdownMenuItem>
         {options.map((opt) => (
-          <DropdownMenuItem key={opt.value} onClick={() => onChange(opt.value)}>
+          <DropdownMenuItem
+            key={opt.value}
+            className='cursor-pointer'
+            onClick={() => onChange(opt.value)}
+          >
             {opt.label}
           </DropdownMenuItem>
         ))}
