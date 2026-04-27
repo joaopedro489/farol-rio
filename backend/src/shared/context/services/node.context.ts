@@ -11,6 +11,6 @@ export class NodeContext implements Context {
   }
 
   get<T>(key: string): T {
-    return nodeContext.get(key)
+    return nodeContext.get<T>(key) as T
   }
 }
