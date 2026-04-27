@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ROUTES } from '@/constants/routes'
 import { AuthStorage } from '@/services/AuthStorage'
 import axios, { AxiosError } from 'axios'

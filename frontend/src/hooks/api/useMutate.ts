@@ -1,3 +1,4 @@
+import { QueryKeyEnum } from '@/domain/enums/query-keys.enum'
 import {
   DefaultError,
   useMutation,
@@ -5,7 +6,7 @@ import {
   useQueryClient
 } from '@tanstack/react-query'
 
-type QueryKey = any[]
+type QueryKey = QueryKeyEnum[]
 
 type InvalidateQueryKeyType<TData, TVariables, TContext> =
   | QueryKey

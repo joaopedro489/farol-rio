@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Query, useQuery } from '@tanstack/react-query'
 
 export interface IUseFetchProps<T> {
@@ -15,6 +16,6 @@ export function useFetch<T>(params: IUseFetchProps<T>) {
     refetchInterval: Infinity,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    ...params,
+    ...params
   })
 }

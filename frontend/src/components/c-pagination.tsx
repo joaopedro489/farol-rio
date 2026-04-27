@@ -24,14 +24,22 @@ export const CPagination = ({ page, totalPages, totalCount, onChange }: Props) =
       <Pagination className='mx-0 w-auto'>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious text='anterior' onClick={() => page > 1 && onChange(page - 1)} />
+            <PaginationPrevious
+              text='anterior'
+              className='cursor-pointer'
+              onClick={() => page > 1 && onChange(page - 1)}
+            />
           </PaginationItem>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
             <PaginationItem key={p}>
               <PaginationLink
                 isActive={p === page}
                 onClick={() => onChange(p)}
-                className={p === page ? 'border-foreground font-semibold' : 'border border-border'}
+                className={
+                  p === page
+                    ? 'border-foreground font-semibold cursor-pointer'
+                    : 'border border-border cursor-pointer'
+                }
               >
                 {p}
               </PaginationLink>
@@ -40,6 +48,7 @@ export const CPagination = ({ page, totalPages, totalCount, onChange }: Props) =
           <PaginationItem>
             <PaginationNext
               text='próxima'
+              className='cursor-pointer'
               onClick={() => page < totalPages && onChange(page + 1)}
             />
           </PaginationItem>

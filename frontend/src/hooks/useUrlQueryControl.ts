@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
@@ -26,13 +27,6 @@ export const useUrlQueryControl = () => {
     [searchParams]
   )
 
-  const setManyQueryParam = useCallback(
-    (values: Record<string, any>) => {
-      router.push(`${pathname}?${buildParams(values).toString()}`)
-    },
-    [buildParams, pathname, router]
-  )
-
   const replaceManyQueryParam = useCallback(
     (values: Record<string, any>) => {
       router.replace(`${pathname}?${buildParams(values).toString()}`)
@@ -40,5 +34,5 @@ export const useUrlQueryControl = () => {
     [buildParams, pathname, router]
   )
 
-  return { setManyQueryParam, replaceManyQueryParam }
+  return { replaceManyQueryParam }
 }
