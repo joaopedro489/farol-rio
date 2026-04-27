@@ -34,8 +34,12 @@ export const ChildHeader = ({
 
   return (
     <div>
-      <div className='flex items-center mb-4 cursor-pointer' onClick={() => router.back()}>
-        <ArrowLeftIcon size={20} className='text-muted-foreground' />
+      <div className='flex items-center mb-4'>
+        <ArrowLeftIcon
+          size={20}
+          className='text-muted-foreground cursor-pointer'
+          onClick={() => router.back()}
+        />
       </div>
       <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
         <div className='flex items-center gap-4'>
