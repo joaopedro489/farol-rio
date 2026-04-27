@@ -38,9 +38,9 @@ E optei por trabalhar com um banco de dados relacional, sendo ele o Postgres, pa
 
 - **Context para o backend**: Optei por usar `AsyncLocalStorage` (via `async_hooks`) para propagar informações do usuário autenticado entre as camadas, sem precisar passá-las manualmente entre services e repositories. O trade-off é ser uma abordagem menos comum, que pode confundir quem não conhece `async_hooks`, mas ganha bastante em organização.
 
-- **Testes Unitários**: Escrevi testes unitários das services e entities do backend com Vitest para garantir a estabilidade da lógica de negócio. O trade-off é não ter cobertura de testes de componentes no frontend nem testes de integração/e2e, que ficaram de fora pelo prazo.
+- **Testes Unitários**: Escrevi testes unitários das services e entities do backend com Vitest para garantir a estabilidade da lógica de negócio. Em contra partida é não ter cobertura de testes de componentes no frontend nem testes de integração/e2e, que ficaram de fora pelo prazo.
 
-- **Visualizações no Dashboard**: Usei `recharts` para os gráficos do dashboard por ser uma lib leve, responsiva e fácil de integrar com componentes do React. O trade-off foi não conseguir implementar um mapa de calor para uma análise geográfica dos alertas por bairro.
+- **Visualizações no Dashboard**: Usei `recharts` para os gráficos do dashboard por ser uma lib leve, responsiva e fácil de integrar com componentes do React. Porém não foi possível implementar um mapa de calor para uma análise geográfica dos alertas por bairro devido ao prazo, o que seria um complemento interessante para a leitura dos dados.
 
 - **Validação de Dados**: Validei os dados nas duas pontas: `class-validator` nos DTOs do backend e `react-hook-form` + `zod` no frontend. Mesmo com só o formulário de login, optei por já deixar a estrutura pronta para padronizar formulários futuros.
 
