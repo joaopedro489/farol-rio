@@ -57,20 +57,24 @@ export class ChildModel {
     offset: number
     limit: number
   }): BrowseChildrenOutput {
-    const items = children.map(
-      (child) =>
-        new ChildrenOutput({
-          id: child.id,
-          name: child.name,
-          birthday: child.birthday,
-          neighborhood: child.neighborhood,
-          isHealthWithAlert: (child.health?.alerts.length ?? 0) > 0,
-          isEducationWithAlert: (child.education?.alerts.length ?? 0) > 0,
-          isAssistanceWithAlert:
-            (child.socialAssistance?.alerts.length ?? 0) > 0,
-          status: child.reviewed,
-        }),
-    )
+    const items = children.map((child) => {
+      return new ChildrenOutput({
+        id: child.id,
+        name: child.name,
+        birthday: child.birthday,
+        neighborhood: child.neighborhood,
+        isHealthWithAlert: child.health
+          ? (child.health.alerts?.length ?? 0) > 0
+          : null,
+        isEducationWithAlert: child.education
+          ? (child.education.alerts?.length ?? 0) > 0
+          : null,
+        isAssistanceWithAlert: child.socialAssistance
+          ? (child.socialAssistance.alerts?.length ?? 0) > 0
+          : null,
+        status: child.reviewed,
+      })
+    })
 
     return new BrowseChildrenOutput({ items, total, offset, limit })
   }

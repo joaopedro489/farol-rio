@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common'
 
 import { ChildrenTokens } from '../../constants/tokens'
 import { ChildRepository } from '../../database/repository/child.repository'
-import { ChildModel } from '../../database/models/child.model'
 import { BrowseChildrenOutput } from '../../domain/outputs/browse-children.output'
 import { AlertTypeEnum } from '../../domain/types/enum/alert-type.enum'
 import { ReviewStatusEnum } from '../../domain/types/enum/review-status.enum'

@@ -13,6 +13,7 @@ type ChildOutputConstructor = {
   responsible: string
   isReviewed: boolean
   reviewedByEmail: string | null
+  reviewedAt: Date | null
   health: ChildHealth | null
   education: ChildEducation | null
   socialAssistance: ChildSocialAssistance | null
@@ -26,6 +27,7 @@ export class ChildOutput {
   responsible: string
   isReviewed: boolean
   reviewedByEmail: string | null
+  reviewedAt: Date | null
   health: ChildHealth | null
   education: ChildEducation | null
   socialAssistance: ChildSocialAssistance | null
@@ -40,6 +42,7 @@ export class ChildOutput {
     this.reviewedByEmail = params.reviewedByEmail
     this.health = params.health
     this.education = params.education
+    this.reviewedAt = params.reviewedAt
     this.socialAssistance = params.socialAssistance
   }
 
@@ -55,6 +58,7 @@ export class ChildOutput {
       health: child.health,
       education: child.education,
       socialAssistance: child.socialAssistance,
+      reviewedAt: child.reviewedAt,
     })
   }
 }

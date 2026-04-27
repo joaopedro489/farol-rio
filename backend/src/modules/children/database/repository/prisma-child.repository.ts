@@ -16,13 +16,13 @@ export class PrismaChildRepository implements ChildRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async browse(params: BrowseChildrenParams): Promise<BrowseChildrenOutput> {
-    const where = this.buildWhere(params)
+    const where = await this.buildWhere(params)
 
     const [rows, total] = await Promise.all([
       this.prisma.child.findMany({
         where,
         include: { reviewed_by: true },
-        orderBy: { created_at: 'desc' },
+        orderBy: { name: 'asc' },
         skip: params.offset,
         take: params.limit,
       }),
@@ -48,6 +48,15 @@ export class PrismaChildRepository implements ChildRepository {
     return ChildModel.toEntity(row)
   }
 
+  async listNeighborhoods(): Promise<string[]> {
+    const rows = await this.prisma.child.findMany({
+      select: { neighborhood: true },
+      distinct: ['neighborhood'],
+      orderBy: { neighborhood: 'asc' },
+    })
+    return rows.map((r) => r.neighborhood)
+  }
+
   async edit(child: Child): Promise<void> {
     await this.prisma.child.update({
       where: { id: child.id },
@@ -59,7 +68,9 @@ export class PrismaChildRepository implements ChildRepository {
     })
   }
 
-  private buildWhere(params: BrowseChildrenParams): Prisma.ChildWhereInput {
+  private async buildWhere(
+    params: BrowseChildrenParams,
+  ): Promise<Prisma.ChildWhereInput> {
     const where: Prisma.ChildWhereInput = {}
 
     if (params.name) {
@@ -77,17 +88,29 @@ export class PrismaChildRepository implements ChildRepository {
     }
 
     if (params.type) {
-      where.OR = params.type.map((t) => {
-        if (t === AlertTypeEnum.HEALTH) {
-          return { health: { not: Prisma.DbNull } }
-        }
-        if (t === AlertTypeEnum.EDUCATION) {
-          return { education: { not: Prisma.DbNull } }
-        }
-        return { social_assistance: { not: Prisma.DbNull } }
-      })
+      const idsByType = await Promise.all(
+        params.type.map(async (type) => await this.filterByType(type)),
+      )
+      const ids = idsByType.flat().map(({ id }) => id)
+      where.id = { in: ids }
     }
 
     return where
+  }
+
+  private async filterByType(
+    type: AlertTypeEnum,
+  ): Promise<Array<{ id: string }>> {
+    const column =
+      type === AlertTypeEnum.HEALTH
+        ? 'health'
+        : type === AlertTypeEnum.EDUCATION
+          ? 'education'
+          : 'social_assistance'
+
+    return this.prisma.$queryRaw<{ id: string }[]>`
+      SELECT id FROM "children"
+      WHERE jsonb_array_length(${Prisma.raw(column)}->'alerts') > 0
+    `
   }
 }

@@ -3,9 +3,9 @@ type ChildrenOutputConstructor = {
   name: string
   birthday: Date
   neighborhood: string
-  isHealthWithAlert: boolean
-  isEducationWithAlert: boolean
-  isAssistanceWithAlert: boolean
+  isHealthWithAlert: boolean | null
+  isEducationWithAlert: boolean | null
+  isAssistanceWithAlert: boolean | null
   status: boolean
 }
 
@@ -14,9 +14,9 @@ export class ChildrenOutput {
   name: string
   birthday: Date
   neighborhood: string
-  isHealthWithAlert: boolean
-  isEducationWithAlert: boolean
-  isAssistanceWithAlert: boolean
+  isHealthWithAlert: boolean | null
+  isEducationWithAlert: boolean | null
+  isAssistanceWithAlert: boolean | null
   status: boolean
 
   constructor(params: ChildrenOutputConstructor) {

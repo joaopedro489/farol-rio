@@ -17,8 +17,7 @@ export class BrowseChildrenQuery {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
-  @Min(1)
-  page?: number
+  offset?: number
 
   @IsOptional()
   @Type(() => Number)

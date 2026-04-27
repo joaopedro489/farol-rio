@@ -16,4 +16,5 @@ export interface ChildRepository {
   browse(params: BrowseChildrenParams): Promise<BrowseChildrenOutput>
   findById(id: string): Promise<Child | null>
   edit(child: Child): Promise<void>
+  listNeighborhoods(): Promise<string[]>
 }
